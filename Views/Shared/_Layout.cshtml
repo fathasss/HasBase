@@ -1,0 +1,167 @@
+﻿@using System.Web;
+@using HasB4bBase.Models.EntityAccess;
+
+@{
+    Customer customer = !object.Equals(Session["CurrentCustomer"] as Customer, null) ? Session["CurrentCustomer"] as Customer : new Customer();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - New B4B</title>
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/b4bApp")
+    <script src="~/Scripts/layoutApp.js"></script>
+    @Scripts.Render("~/bundles/toastr")
+</head>
+<body ng-app="hasB4B">
+    <div id="content" ng-controller="layoutController">
+        <div class="navbar-header">
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" ng-click="window.location = '/Home/Index'">HASTechnology</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home Page", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Search", "Index", "Search")</li>
+                        <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
+                        <li>@Html.ActionLink("About", "About", "Home", null, new { @class = "dropdown-toggle" })</li>
+                        <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Finance", "Index", "Finance")</li>
+                    </ul>
+                    @{
+                        if (object.Equals(customer.Username, "Anonymous"))
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a ng-click="signUp()"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                                <li><a ng-click="login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a ng-click="customerDetail()"><span><i class="glyphicon glyphicon-user"></i></span> @customer.Username</a></li>
+                                <li><a ng-click="logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+                            </ul>
+                        }
+                    }
+                    <form class="navbar-form navbar-right" action="/action_page.php">
+                        <div class="input-group">
+                            <input type="text" id="searchItem" class="form-control" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" ng-click="search()">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Copyright © Fatih HAS</p>
+            </footer>
+        </div>
+
+        <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title" id="signUpLabel">Kayıt Ol</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="CustomerName">Kullanıcı Adı:</label>
+                                <input type="text" class="form-control" ng-model="customer.Username" id="CustomerName" placeholder="Kullanıcı Adı" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerPass">Parola:</label>
+                                <input type="password" class="form-control" ng-model="customer.Password" id="CustomerPassword" placeholder="Parola" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerPassAgain">Parola Tekrar:</label>
+                                <input type="password" class="form-control" id="CustomerPasswordAgain" placeholder="Parola Tekrar" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email:</label>
+                                <input type="text" class="form-control" ng-model="customer.EMail" id="CustomerMail" placeholder="EMail" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone">Telefon:</label>
+                                <input type="text" class="form-control" ng-model="customer.Phone" id="CustomerPhone" placeholder="Telefon" />
+                            </div>
+                            <div class="form-group">
+                                <label for="City">İl:</label>
+                                <input type="text" class="form-control" ng-model="customer.City" id="CustomerCity" placeholder="İl" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Town">İlçe:</label>
+                                <input type="text" class="form-control" ng-model="customer.Town" id="CustomerTown" placeholder="İlçe" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn btn-primary" id="btnAdd" ng-click="customerAdd();">Kayıt Ol</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="customerDetail" tabindex="-1" role="dialog" aria-labelledby="customerDetailLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title" id="customerDetailLabel">Kullanıcı Bilgileri</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="CustomerName">Kullanıcı Adı:</label>
+                                <input type="text" class="form-control" id="CurrentCustomerName" placeholder="{{CurrentCustomer.Username}}" disabled="disabled" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerPass">Parola:</label>
+                                <input type="password" class="form-control"  id="CurrentCustomerPassword" placeholder="{{CurrentCustomer.Password}}" disabled="disabled" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email:</label>
+                                <input type="text" class="form-control"  id="CurrentCustomerMail"  placeholder="{{CurrentCustomer.EMail}}" disabled="disabled"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone">Telefon:</label>
+                                <input type="text" class="form-control" id="CurrentCustomerPhone"  placeholder="{{CurrentCustomer.Phone}}" disabled="disabled" />
+                            </div>
+                            <div class="form-group">
+                                <label for="City">İl:</label>
+                                <input type="text" class="form-control"  id="CurrentCustomerCity"  placeholder="{{CurrentCustomer.City}}" disabled="disabled"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Town">İlçe:</label>
+                                <input type="text" class="form-control"  id="CurrentCustomerTown"  placeholder="{{CurrentCustomer.Town}}" disabled="disabled"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger col-md-12 text-center" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

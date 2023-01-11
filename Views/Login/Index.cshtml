@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script>
+    <script src="~/Scripts/AngularJs/angular.js"></script>
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <script src="~/Scripts/Pages/login.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsGjCZ7iNKM1ZdNMMZA9iUPUzB6-pi-LY"></script>
+    @Scripts.Render("~/bundles/toastr")
+</head>
+<body ng-app="hasB4bLogin">
+    <div id="content" ng-controller="loginController">
+        <div class="container">
+            <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">Sign In</div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                            <a ng-click="forgotPassword()">Forgot password?</a>
+                        </div>
+                    </div>
+                    <div style="padding-top:30px" class="panel-body">
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                        <form id="loginform" class="form-horizontal" role="form">
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="form2Example1" ng-model="customerModel.Username" type="text" class="form-control" name="username" value=""
+                                       placeholder="username or email">
+                            </div>
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="form2Example2" ng-model="customerModel.Password" type="password" class="form-control" name="password"
+                                       placeholder="password">
+                            </div>
+                            <div class="input-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <div style="margin-top:10px" class="form-group">
+                                <div class="col-sm-12 controls">
+                                    <a id="btn-login" href="#" ng-click="login()" ng-keypress="keyevent($event)" class="btn btn-success">Login</a>
+                                    <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 control">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                        Don't have an account!
+                                        <p>Not a member? <a ng-click="signUp()">Register</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog" aria-labelledby="forgotPassLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title col-md-6" id="forgotPassLabel">Parolamı Unuttum</h4>
+                        <button type="button" class="close col-md-6 text-right" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="CustomerName">Kullanıcı Adı:</label>
+                                <input type="text" class="form-control" id="CustomerName" ng-model="oldCustomer.Username" placeholder="Kullanıcı Adı" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email:</label>
+                                <input type="text" class="form-control" id="CustomerMail" placeholder="EMail" ng-model="oldCustomer.EMail" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone">Telefon:</label>
+                                <input type="text" class="form-control" id="CustomerPhone" placeholder="Telefon" ng-model="oldCustomer.Phone"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn btn-primary" id="btnSend" ng-click="forgotPassSave()">Gönder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title col-md-6" id="signUpLabel">Kayıt Ol</h4>
+                        <button type="button" class="close col-md-6 text-right" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="CustomerName">Kullanıcı Adı:</label>
+                                <input type="text" class="form-control" id="CustomerUsName" placeholder="Kullanıcı Adı" ng-model="newCustomer.Username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerPass">Parola:</label>
+                                <input type="password" class="form-control" id="CustomerPassword" placeholder="Parola" ng-model="newCustomer.Password"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerPassAgain">Parola Tekrar:</label>
+                                <input type="password" class="form-control" id="CustomerPasswordAgain" placeholder="Parola Tekrar"  ng-model="newCustomer.PasswordAgain"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Email:</label>
+                                <input type="text" class="form-control" id="CustomerEMail" placeholder="EMail" ng-model="newCustomer.EMail"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone">Telefon:</label>
+                                <input type="text" class="form-control" id="CustomerUsPhone" placeholder="Telefon" ng-model="newCustomer.Phone"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="City">İl:</label>
+                                <input type="text" class="form-control" id="CustomerCity" placeholder="İl" ng-model="newCustomer.City"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Town">İlçe:</label>
+                                <input type="text" class="form-control" id="CustomerTown" placeholder="İlçe" ng-model="newCustomer.Town" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn btn-primary" id="btnAdd" ng-click="customerAdd();">Kayıt Ol</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

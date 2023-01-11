@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<br/>
+<br/>
+<script src="~/Scripts/Pages/finance.js"></script>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Kur Adı</th>
+            <th scope="col">ForexBuying</th>
+            <th scope="col">ForexSelling</th>
+            <th scope="col">BanknoteBuying</th>
+            <th scope="col">BanknoteSelling</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in FinanceList">
+            <td>{{row.CurrencyName}}</td>
+            <td>{{row.ForexBuying}}</td>
+            <td>{{row.ForexSelling}}</td>
+            <td>{{row.BanknoteBuying}}</td>
+            <td>{{row.BanknoteSelling}}</td>
+        </tr>      
+    </tbody>
+</table>
