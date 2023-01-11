@@ -152,6 +152,7 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Attribute\ExceptionLogger.cs" />
     <Compile Include="Attribute\GeneralLogger.cs" />
+    <Compile Include="Attribute\Validation.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FinanceController.cs" />
@@ -211,6 +212,11 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\MailTemplate\forgotPassword.html" />
+    <Content Include="Files\MailTemplate\loginProcess.html" />
+    <Content Include="Files\MailTemplate\orderCargo.html" />
+    <Content Include="Files\MailTemplate\orderConfirm.html" />
+    <Content Include="Files\MailTemplate\orderDelete.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\b4bApp.js" />
@@ -304,7 +310,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Files\MailTemplate\" />
     <Folder Include="Scripts\Admin\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Report\" />
