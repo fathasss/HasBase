@@ -94,8 +94,8 @@ C:\Users\fatihh\Documents\GitHub\HasBase\bin\System.Web.WebPages.Deployment.xml
 C:\Users\fatihh\Documents\GitHub\HasBase\bin\System.Web.WebPages.Razor.xml
 C:\Users\fatihh\Documents\GitHub\HasBase\bin\Antlr3.Runtime.pdb
 C:\Users\fatihh\Documents\GitHub\HasBase\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasBase.csproj.AssemblyReference.cache
 C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasBase.csproj.CoreCompileInputs.cache
 C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasBase.csproj.CopyComplete
 C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasB4bBase.dll
 C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasB4bBase.pdb
+C:\Users\fatihh\Documents\GitHub\HasBase\obj\Debug\HasBase.csproj.AssemblyReference.cache
