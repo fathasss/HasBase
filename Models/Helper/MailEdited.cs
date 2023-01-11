@@ -6,17 +6,16 @@ using System.Net;
 using System.Net.Mail;
 using System.IO;
 using HasB4bBase.Models.EntityAccess;
+using HasMailHelper.Models;
 
 namespace HasB4bBase.Models.Helper
 {
     public class MailEdited : BaseModels
     {
-
+        //Example
         public bool SendMail(MailInformation mailInformation)
         {
             string loadHtml = string.Empty;
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("fatihhas2609@gmail.com");
 
             switch (mailInformation.Type)
             {
@@ -56,7 +55,6 @@ namespace HasB4bBase.Models.Helper
                     .Replace("{Price}", item.Product.Price.ToString());
                 number++;
             }
-
             return true;
         }
     }

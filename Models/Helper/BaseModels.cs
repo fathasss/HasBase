@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HasB4bBase.Attribute;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -76,7 +77,8 @@ namespace HasB4bBase.Models.Helper
 
             return list;
         }
-
+         
+        [ExceptionLogger]
         public static DataTable XmlToDataTable(string xmlPath)
         {
             DataTable dt = new DataTable();
@@ -107,7 +109,7 @@ namespace HasB4bBase.Models.Helper
                     rContent.Clear();
                 }
             }
-            catch(Exception exp) {   }
+            catch(Exception exp) { return new DataTable(); }
 
             return dt;
         }
