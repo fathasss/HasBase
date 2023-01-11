@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Web;
 using System.Web.Mvc;
-using HasB4bBase.Models.Utility;
 
 namespace HasB4bBase.Attribute
 {
@@ -50,7 +49,7 @@ namespace HasB4bBase.Attribute
                                "@pIpAddress", IPAddress.ToString(),
                                "@pBrowser", browser.ToString() };
 
-            DbHelper.ExecuteNonQuery("_Insert_Logger_Login_Information", param);
+            HasDbHelper.HasDbHelper.ExecuteNonQuery("_Insert_Logger_Login_Information", param);
         }
     }
 }

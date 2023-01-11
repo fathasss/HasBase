@@ -66,10 +66,22 @@ namespace HasB4bBase.Controllers
         }
 
         [HttpPost]
-        public string Logout()
+        public MessageBox Logout()
         {
-            Session.Abandon();
-            return "Başarı ile çıkış yaptınız.";
+            MessageBox result = new MessageBox();
+            try
+            {
+                Session.Abandon();
+                result.Type = Enums.MessageType.Success;
+                result.Content = "Başarı ile çıkış yaptınız.";
+                return result;
+            }
+            catch(Exception exp)
+            {
+                result.Type = Enums.MessageType.Error;
+                result.Content = "Bir sorun oluştu. " + exp.Message;
+                return result;
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using HasB4bBase.Models.EntityAccess;
-using HasB4bBase.Models.Utility;
 using PostSharp.Aspects;
 using System;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace HasB4bBase.Attribute
         public static int InsertLog(int pCustomerId, string pCustomerName, string pCustomerEmail, string pExceptionMessage)
         {
             object[] param = { "@pCustomerId", pCustomerId, "@pCustomerName", pCustomerName, "@pCustomerEmail", pCustomerEmail, "@pExceptionMes", pExceptionMessage, "@ExcepDate", DateTime.Now.ToString() };
-            return DbHelper.ExecuteNonQuery("_Insert_LogError_Message",param);
+            return HasDbHelper.HasDbHelper.ExecuteNonQuery("_Insert_LogError_Message",param);
         }
     }
 }

@@ -9,7 +9,7 @@ using HasB4bBase.Models.EntityAccess;
 
 namespace HasB4bBase.Models.Helper
 {
-    public class MailSettings : BaseModels
+    public class MailEdited : BaseModels
     {
 
         public bool SendMail(MailInformation mailInformation)

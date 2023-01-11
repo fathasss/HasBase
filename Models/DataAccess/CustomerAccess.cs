@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using HasB4bBase.Models.EntityAccess;
 using HasB4bBase.Models.Helper;
-using HasB4bBase.Models.Utility;
 
 namespace HasB4bBase.Models.DataAccess
 {
