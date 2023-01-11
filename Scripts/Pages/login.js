@@ -23,23 +23,21 @@
     };
 
     $scope.login = function () {
-        $http(
-            {
-                method: 'POST',
-                url: '/Login/Index',
-                data: { model: $scope.customer }
-            }).then(function (response) {
-                console.log(response.data[0]);
-                var dataResult = response.data[0];
-                if (dataResult.Type != 0) {
-                    toastr.success(dataResult.Content);
-                    window.location.href = '/Home/Index';
-                }
-                else {
-                    toastr.error(dataResult.Content);
-                }
-            });
-
+        $http({
+            method: 'POST',
+            url: '/Login/Index',
+            data: { model: $scope.customer }
+        }).then(function (response) {
+            console.log(response.data[0]);
+            var dataResult = response.data[0];
+            if (dataResult.Type != 0) {
+                toastr.success(dataResult.Content);
+                window.location.href = '/Home/Index';
+            }
+            else {
+                toastr.error(dataResult.Content);
+            }
+        });
     }
 
     $scope.forgotPassword = function () {
@@ -51,22 +49,21 @@
         $scope.customer.EMail = $scope.oldCustomer.EMail;
         $scope.customer.Phone = $scope.oldCustomer.Phone;
 
-        $http(
-            {
-                method: 'POST',
-                url: '/Login/ForgotPassword',
-                data: { customer: $scope.customer }
-            }).then(function (response) {
-                var dataResult = response.data;
-                if (dataResult != null) {
-                    $('#forgotPassword').modal('hide');
-                    toastr.success(response.data);
-                }
-                else {
-                    $('#forgotPassword').modal('hide');
-                    toastr.error("ERROR");
-                }
-            });
+        $http({
+            method: 'POST',
+            url: '/Login/ForgotPassword',
+            data: { customer: $scope.customer }
+        }).then(function (response) {
+            var dataResult = response.data;
+            if (dataResult != null) {
+                $('#forgotPassword').modal('hide');
+                toastr.success(response.data);
+            }
+            else {
+                $('#forgotPassword').modal('hide');
+                toastr.error("ERROR");
+            }
+        });
     }
 
     $scope.signUp = function () {
@@ -93,22 +90,21 @@
         $scope.customer.Phone = $scope.newCustomer.Phone;
         $scope.customer.City = $scope.newCustomer.City;
         $scope.customer.Town = $scope.newCustomer.Town;
-        $http(
-            {
-                method: 'POST',
-                url: '/Login/SignUp',
-                data: { customer: $scope.customer }
-            }).then(function (response) {
-                var dataResult = response.data[0];
-                if (dataResult.Type != 0) {
-                    $('#signUp').modal('hide');
-                    toastr.success(dataResult.Content);
-                }
-                else {
-                    $('#signUp').modal('hide');
-                    toastr.error(dataResult.Content);
-                }
-            });
+        $http({
+            method: 'POST',
+            url: '/Login/SignUp',
+            data: { customer: $scope.customer }
+        }).then(function (response) {
+            var dataResult = response.data[0];
+            if (dataResult.Type != 0) {
+                $('#signUp').modal('hide');
+                toastr.success(dataResult.Content);
+            }
+            else {
+                $('#signUp').modal('hide');
+                toastr.error(dataResult.Content);
+            }
+        });
     }
     $scope.getLocation = function () {
         if (navigator.geolocation) {
@@ -142,4 +138,5 @@
     $(document).ready(function () {
         $scope.getLocation();
     });
-}
+
+});
