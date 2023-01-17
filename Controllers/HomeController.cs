@@ -1,4 +1,5 @@
-﻿using HasB4bBase.Attribute;
+﻿using Has.BadWordsFilter;
+using HasB4bBase.Attribute;
 using HasB4bBase.Models;
 using HasB4bBase.Models.EntityAccess;
 using Newtonsoft.Json;

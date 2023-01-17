@@ -48,6 +48,10 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="Has.BadWordsFilter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\source\repos\Has.BadWordsFilter\bin\Debug\Has.BadWordsFilter.dll</HintPath>
+    </Reference>
     <Reference Include="HasDbHelper">
       <HintPath>..\..\..\source\repos\HasDbHelper\bin\Debug\HasDbHelper.dll</HintPath>
     </Reference>
